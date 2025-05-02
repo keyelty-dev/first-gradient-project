@@ -5,3 +5,5 @@
   <li> My first gradient project</li>
   <li> Date: 5/3/2025 </li>
 </ul>
+
+![p](https://github.com/keyelty-dev/first-gradient-project/blob/main/assets/p.png?raw=true)
