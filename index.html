@@ -9,14 +9,19 @@
     <link rel="stylesheet" href="assets/stylesheet/matser.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-
     <style>
-        * {
-            margin: 0;
+        #emailLabel,
+        #passLabel {
+            color: red;
+            display: block;
+            font-size: 12px;
+            margin: 0 5px;
             padding: 0;
-            box-sizing: border-box;
+            line-height: 1;
+            position: relative;
+            top: -30px;
+            
+
         }
     </style>
 </head>
@@ -29,7 +34,7 @@
                 </h2>
                 <ul>
                     <li class="txt"><a class="txt" href="">home</a></li>
-                    <li class="txt"><a class="txt" href="">feanture</a></li>
+                    <li class="txt"><a class="txt" href="">feature</a></li>
                     <li class="txt"><a class="txt" href="">about</a></li>
                     <li class="txt"><a class="txt" href="">service</a></li>
                     <li class="txt"><a class="txt" href="">contact</a></li>
@@ -40,42 +45,67 @@
                     <div class="left">
                         <h1 class="txt">creative</h1>
                         <h4 class="txt tx1">landing page template background</h4>
-                        <p class="txt tx2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero voluptatum
-                            nulla provident aliquid voluptatem placeat totam labore enim. Ipsum, expedita! Ea sed veniam
-                            facilis recusandae? Ut atque doloribus esse accusantium eveniet dolor similique modi
-                            officiis architecto quis ab, perspiciatis, voluptatem necessitatibus ea dolore ducimus nobis
-                            tempore tempora velit ratione. Saepe nam reprehenderit harum, nisi facilis ut sunt facere
-                            nihil possimus, eum pariatur est quidem a asperiores minima corporis repudiandae soluta
-                            veniam? Illum repellendus vitae tempora consequuntur minima placeat porro magnam, quis
-                            soluta mollitia maiores neque sit recusandae voluptates dolorem. Doloremque incidunt quasi
-                            quis aperiam ea necessitatibus harum omnis consectetur eos!</p>
+                        <p class="txt tx2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
                         <a href="">learn more</a>
                     </div>
                     <div class="right">
                         <div>
                             <h4>your company</h4>
                         </div>
-                        <form action="" method="get" autocomplete="off">
-                            <label for="inp1">enter username </label>
+                        <form action="register.php" method="post" autocomplete="off" name="regForm"
+                            onsubmit="return myForm()">
+                            <label for="inp1">enter your email</label>
                             <div class="input-wrapper">
                                 <i class="fa fa-user"></i>
-                                <input autofocus id="inp1" type="text" placeholder="user name" name="fname">
+                                <input autofocus id="inp1" type="text" placeholder="email" name="email">
                             </div>
-                            <label for="inp2">enter password </label>
+                            <label id="emailLabel"></label>
+
+                            <label for="inp2">enter your password</label>
                             <div class="input-wrapper">
                                 <i class="fa fa-lock"></i>
-                                <input autofocus id="inp2" type="text" placeholder="password" name="pass">
+                                <input id="inp2" type="password" placeholder="password" name="pass">
                             </div>
+                            <label id="passLabel"></label>
+
+                            <div class="btn"><button type="submit">log in</button></div>
                         </form>
-                        <div class="btn"><a href="">log in</a></div>
-
-
                     </div>
                 </div>
             </section>
-
         </div>
     </main>
+
+    <script>
+        const emailLabel = document.getElementById('emailLabel');
+        const passLabel = document.getElementById('passLabel');
+
+        function myForm() {
+            emailLabel.innerHTML = '';
+            passLabel.innerHTML = '';
+
+            let _mail = document.forms['regForm']['email'].value.trim();
+            let _pass = document.forms['regForm']['pass'].value;
+
+            if (_same(_mail)) {
+                emailLabel.innerText = 'Your email is incorrect!';
+            } else if (_mail.length < 10 || _mail.lastIndexOf('.') < _mail.length - 4 || _mail.indexOf('@') === -1) {
+                emailLabel.innerText = 'Your email is incorrect!';
+            }
+
+            if (_same(_pass)) {
+                passLabel.innerHTML = 'Your password is incorrect!';
+            } else if (_pass.length < 7 || _pass.search(/[a-z]/) == -1 || _pass.search(/[A-Z]/) == -1 || _pass.search(/[0-9]/) == -1 || _pass.search(/[~!@#$%^&*()_+{}\[\]|":;<>?,./\\-]/) == -1) {
+                passLabel.innerHTML = 'Your password is incorrect!';
+            }
+
+            return emailLabel.innerText === '' && passLabel.innerText === '';
+        }
+
+        function _same(same) {
+            return same === '' || same === null || same.indexOf('>script') >= 0 || same.indexOf('&lt;script') >= 0;
+        }
+    </script>
 </body>
 
 </html>
